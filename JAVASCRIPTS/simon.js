@@ -73,12 +73,12 @@ Game.prototype.wrongAnswer = function () {
     this.resultList = [];
     this.level = 1;
 
-   
-   
     this.title.text("Game Over!!!");
     this.scoreText.text("score: "+score);
     this.title.after(this.scoreText)
-    this.displayPopup("Press any key to Start Game!!");
+    setTimeout(()=>{
+        game.displayPopup("Click to start Game!!");
+    },500);
 }
 
 Game.prototype.playNextLevel = function () {
@@ -90,7 +90,10 @@ Game.prototype.playNextLevel = function () {
     const box = this.getBoxByIndex(boxNumber);
     const soundFile = this.getSoundFilePath(boxNumber);
     const audio = new Audio(soundFile);
-    this.clickBox(box,false);
+    setTimeout(()=>{
+        this.clickBox(box,false);
+    },1000);
+    
     setTimeout(()=>{
         this.gameInProcess = false;
     },900);
@@ -142,16 +145,34 @@ Game.prototype.initialize = function() {
     this.popup.addClass("active");
     this.popup.hide();
     this.popup_text.addClass("game-text");
+    this.popup.on("click",()=> {
+        var startGame = false;
+        var delayValue = 1000;
+        if (this.gameOver){
+	    this.setTitle("Simon Game");
+            this.scoreText.remove();
+            this.gameOver = false;
+            startGame   = true;
+            delayValue  = 2000;
+        } else if(!this.gameStart){
+            startGame = true;
+        }
+
+        if(startGame){
+            this.removePopup();
+            setTimeout(()=>{
+                this.run();
+            },delayValue)
+        }
+    });
 }
 
 Game.prototype.run = function() {
     this.gameStart = true;
-    this.setTitle("Level "+this.level);
     setTimeout(()=>{
         this.playNextLevel();
     },500);
 }
-
 
 var game = new Game();
 game.initialize();
@@ -167,28 +188,8 @@ for(var i = 0;i<game.simonBoxes.length;i++){
 }  
 
 setTimeout(()=>{
-    game.displayPopup("Press key A to Start Game");
+    game.displayPopup("Click to start Game!!");
 },500);
 
 
-$(document).on("keypress",(event)=>{
-    const pressedKey = event.key;
-    // console.log("key pressed: "+pressedKey);
-    var startGame = false;
-    var delayValue = 1000;
-    if(!game.gameStart && pressedKey===game.KeyToStartGame){
-        startGame = true;
-    } else if (game.gameOver){
-        game.scoreText.remove();
-        game.gameOver = false;
-        startGame   = true;
-        delayValue  = 2000;
-    }
 
-    if(startGame){
-        game.removePopup();
-        setTimeout(()=>{
-            game.run();
-        },delayValue)
-    }
-});
