@@ -1,0 +1,516 @@
+:root {
+  /*--primary-color: #217282; /* define a primary color variable */
+  /*--secondary-clor: #BBD6B8; */
+  --primary-color: #261C06; /* define a primary color variable ABC4AA */
+  --secondary-clor: #FFA75F;
+  --car-background-color: #261C06;
+  --title-color: #FFA75F;
+  --game-title-color :#463a2f;
+  --title-shadow-color :#d0d8dd;
+
+
+  /* font variable*/
+  --font-family-vintage-game:'Press Start 2P', cursive;
+
+  /* font size */
+  --game-title-font-size : 5rem;
+}
+
+
+html,body {
+    background-color: var(--secondary-clor);
+}
+
+
+/* @media only screen and (min-height: 750px) {
+  footer {
+    position: absolute;
+    width:100%;
+    bottom: 0;
+    left: 0;
+  }
+} */
+
+
+
+h1{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+/* Title section */
+
+.container-fluid{
+  padding: 0%;
+}
+.navbar{
+  padding: 1% 5%;
+  border-bottom: 0px solid var(--secondary-clor);
+  background-color: var(--car-background-color);
+}
+
+.navbar-toggler{
+  background-color: var(--secondary-clor);
+}
+
+/*Navigation link*/
+.nav-link{
+  color:var(--title-color);
+    padding: 0% 3%;
+    font-size: 1.25rem;
+}
+.nav-link:hover{
+    color : var(--secondary-clor);
+    font-weight: 700;
+}
+.nav-link:focus{
+    color : var(--secondary-clor);
+    font-weight: 700;
+}
+.navbar-collapse{
+  display: flex;
+  text-align: right;
+}
+.game-list{
+  font-family: var(--font-family-vintage-game);
+}
+.site-title{
+  font-family: var(--font-family-vintage-game);
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 0%;
+  color : var(--title-color);
+}
+.icon-image{
+    width :  40px;
+    height : 35px;
+    position: relative;
+    bottom: 10px;
+}
+
+/* dice section */
+#dice-section{
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 5% 0%;
+  margin-bottom: 15%;
+}
+
+.dice-button{
+  padding: 2.5% 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#die-2.dice-2{
+  display: none;
+}
+
+
+
+/* button */
+.btn {
+    border:none;
+    align-self: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    justify-self: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-clor);
+}
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn-block {
+  width: 150px;
+}
+
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.popup-content {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#setting-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.setting-content{
+  text-align: left;
+}
+
+.setting-popup-header{
+  display: flex;
+}
+
+.setting-popup-body{
+  display: block;
+}
+
+#setting-close{
+  margin-left: 10px;
+}
+
+/* dice area section */
+.dice-area{
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  width: 100%;
+}
+
+.dice {
+    align-items: center;
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    grid-template-rows: auto;
+    justify-items: center;
+    perspective: 600px;
+    padding: 5%;
+}
+.die-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: 6rem;
+    list-style-type: none;
+    transform-style: preserve-3d;
+    width: 6rem;
+  }
+  .even-roll {
+    transition: transform 1.5s ease-out;
+  }
+  .odd-roll {
+    transition: transform 1.25s ease-out;
+  }
+  .die-item {
+    background-color: var(--primary-color);
+    box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
+      inset 0.5rem -0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    grid-template-areas:
+      "one two three"
+      "four five six"
+      "seven eight nine";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 100%;
+    padding: 1rem;
+    width: 100%;
+  }
+  .dot {
+    align-self: center;
+    background-color: var(--secondary-clor);
+    border-radius: 50%;
+    box-shadow: inset -0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.5);
+    display: block;
+    height: 1.25rem;
+    justify-self: center;
+    width: 1.25rem;
+  }
+  .even-roll[data-roll="1"] {
+    transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
+  }
+  .even-roll[data-roll="2"] {
+    transform: rotateX(450deg) rotateY(720deg) rotateZ(360deg);
+  }
+  .even-roll[data-roll="3"] {
+    transform: rotateX(360deg) rotateY(630deg) rotateZ(360deg);
+  }
+  .even-roll[data-roll="4"] {
+    transform: rotateX(360deg) rotateY(810deg) rotateZ(360deg);
+  }
+  .even-roll[data-roll="5"] {
+    transform: rotateX(270deg) rotateY(720deg) rotateZ(360deg);
+  }
+  .even-roll[data-roll="6"] {
+    transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg);
+  }
+  .odd-roll[data-roll="1"] {
+    transform: rotateX(-360deg) rotateY(-720deg) rotateZ(-360deg);
+  }
+  .odd-roll[data-roll="2"] {
+    transform: rotateX(-270deg) rotateY(-720deg) rotateZ(-360deg);
+  }
+  .odd-roll[data-roll="3"] {
+    transform: rotateX(-360deg) rotateY(-810deg) rotateZ(-360deg);
+  }
+  .odd-roll[data-roll="4"] {
+    transform: rotateX(-360deg) rotateY(-630deg) rotateZ(-360deg);
+  }
+  .odd-roll[data-roll="5"] {
+    transform: rotateX(-450deg) rotateY(-720deg) rotateZ(-360deg);
+  }
+  .odd-roll[data-roll="6"] {
+    transform: rotateX(-360deg) rotateY(-900deg) rotateZ(-360deg);
+  }
+  [data-side="1"] {
+    transform: rotate3d(0, 0, 0, 90deg) translateZ(4rem);
+  }
+  [data-side="2"] {
+    transform: rotate3d(-1, 0, 0, 90deg) translateZ(4rem);
+  }
+  [data-side="3"] {
+    transform: rotate3d(0, 1, 0, 90deg) translateZ(4rem);
+  }
+  [data-side="4"] {
+    transform: rotate3d(0, -1, 0, 90deg) translateZ(4rem);
+  }
+  [data-side="5"] {
+    transform: rotate3d(1, 0, 0, 90deg) translateZ(4rem);
+  }
+  [data-side="6"] {
+    transform: rotate3d(1, 0, 0, 180deg) translateZ(4rem);
+  }
+  [data-side="1"] .dot:nth-of-type(1) {
+    grid-area: five;
+  }
+  [data-side="2"] .dot:nth-of-type(1) {
+    grid-area: one;
+  }
+  [data-side="2"] .dot:nth-of-type(2) {
+    grid-area: nine;
+  }
+  [data-side="3"] .dot:nth-of-type(1) {
+    grid-area: one;
+  }
+  [data-side="3"] .dot:nth-of-type(2) {
+    grid-area: five;
+  }
+  [data-side="3"] .dot:nth-of-type(3) {
+    grid-area: nine;
+  }
+  [data-side="4"] .dot:nth-of-type(1) {
+    grid-area: one;
+  }
+  [data-side="4"] .dot:nth-of-type(2) {
+    grid-area: three;
+  }
+  [data-side="4"] .dot:nth-of-type(3) {
+    grid-area: seven;
+  }
+  [data-side="4"] .dot:nth-of-type(4) {
+    grid-area: nine;
+  }
+  [data-side="5"] .dot:nth-of-type(1) {
+    grid-area: one;
+  }
+  [data-side="5"] .dot:nth-of-type(2) {
+    grid-area: three;
+  }
+  [data-side="5"] .dot:nth-of-type(3) {
+    grid-area: five;
+  }
+  [data-side="5"] .dot:nth-of-type(4) {
+    grid-area: seven;
+  }
+  [data-side="5"] .dot:nth-of-type(5) {
+    grid-area: nine;
+  }
+  [data-side="6"] .dot:nth-of-type(1) {
+    grid-area: one;
+  }
+  [data-side="6"] .dot:nth-of-type(2) {
+    grid-area: three;
+  }
+  [data-side="6"] .dot:nth-of-type(3) {
+    grid-area: four;
+  }
+  [data-side="6"] .dot:nth-of-type(4) {
+    grid-area: six;
+  }
+  [data-side="6"] .dot:nth-of-type(5) {
+    grid-area: seven;
+  }
+  [data-side="6"] .dot:nth-of-type(6) {
+    grid-area: nine;
+  }
+  
+
+  .footer{
+    color: var(--title-color);
+    width  :100%;
+    height : 25%;
+    justify-content: center;
+    text-align: center;
+    padding: 5%;
+    margin-top: 5%;
+    background-color: var(--car-background-color);
+  }
+  .footer:hover{
+    font-size: large;
+    font-weight: 400;
+  }
+
+  .copyright{
+    padding-top: 2%;
+  }
+
+  .social-icon{
+    padding: 0% 2%;
+  }
+  
+  
+  @media (min-width: 700px) {
+    .dice {
+      perspective: 1300px;
+    }
+
+  }
+
+
+
+/* play.html */
+
+.title-text{
+  font-size: 4rem;
+  font-family: var(--font-family-vintage-game);
+  text-shadow: 3px 0 var(--title-shadow-color);
+  color: var(--game-title-color);
+  padding: 2.5% 5% 2.5%;
+  font-weight: 400;
+  text-align: center;
+}
+
+#player_cards{
+  margin: 5% 3% 20%;
+}
+
+.card{
+  background-color: var(--car-background-color);
+}
+
+.card-header{
+  color: var(--secondary-clor);
+}
+
+.card-body{
+  text-align: center;
+}
+
+.card-col{
+  justify-content: center;
+  display: flex;
+  width: 33.33%;
+}
+
+.button{
+  color: var(--secondary-clor);
+  border : none;
+}
+
+.image-holder{
+  width: 100%;
+}
+
+.userIcon{
+  color: var(--secondary-clor);
+  margin: 1%;
+}
+
+.editIcon {
+  margin-left : auto;
+}
+.user-image{
+  width : 25%;
+  height: 25%;
+}
+
+.dice-image{
+  width : 35%;
+  height : 35%;
+  margin: 15%;
+}
+.play-button{
+  padding: 0% 10%;
+}
+
+.game-area{
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+.simon-row{
+  justify-content: center;
+}
+
+.simon-box{
+  margin: 25px;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border: 10px solid black;
+  border-radius: 20%;
+}
+
+.box-clicked{
+  opacity: 0.5;
+  background-color: gray;
+  box-shadow: 0 0 20px white;
+}
+
+.game-over {
+  background-color: red;
+  opacity: 0.8;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.game-text{
+  font-family: var(--font-family-vintage-game);
+  font-size : 2rem;
+}
+
+
+/*
+usefull link
+    https://github.com/hosseinnabi-ir/Roll-Dice-Project-using-CSS-and-JavaScript
+*/
