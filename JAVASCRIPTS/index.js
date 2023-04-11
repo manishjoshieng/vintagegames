@@ -128,22 +128,9 @@ function playText(_msg){
       speech.volume = 1;
       speech.rate = 0.75;
       speech.pitch = 1;
-
-      if (isVoiceLoaded) {
-        const voices = window.speechSynthesis.getVoices();
-        window.speechSynthesis.speak(speech);
-        speech.onend = function(event) {
+      window.speechSynthesis.speak(speech);
+      speech.onend = function(event) {
           console.log("speach completed");
-        };
-      }else {
-        // Wait for the voices to be loaded before playing the sound
-        window.speechSynthesis.onvoiceschanged = function() {
-          console.log("voice loaded");
-          isVoiceLoaded = true;
-          playText(_msg);
-        };
-      }
-  } else {
-    console.log("Voice synthesys not supported by browser");
+      };
   }
 }
