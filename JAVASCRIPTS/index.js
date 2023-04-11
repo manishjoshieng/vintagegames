@@ -1,13 +1,3 @@
-var isVoiceLoaded = false;
-var dice2 = document.getElementById("die-2");
-var rollDice = document.getElementById("rollDice");
-var popup = document.getElementById("popup");
-var setting_popup = document.getElementById("setting-popup");
-var setting_header = document.getElementById("settingHeader");
-var popup_text= document.getElementById("popup-text");
-var settingLink = document.querySelector(".setting");
-var welcome_msg = "Welcome to roll the dice!";
-
 /*main*/
 document.addEventListener('DOMContentLoaded',afterContetnLoaded );
 
@@ -42,6 +32,17 @@ $(document).ready(function() {
   });
 });
 
+var isVoiceLoaded = false;
+var soundEnable = true;
+var dice2 = document.getElementById("die-2");
+var rollDice = document.getElementById("rollDice");
+var popup = document.getElementById("popup");
+var setting_popup = document.getElementById("setting-popup");
+var setting_header = document.getElementById("settingHeader");
+var popup_text= document.getElementById("popup-text");
+var settingLink = document.querySelector(".setting");
+var welcome_msg = "Welcome to roll the dice!";
+
 
 /* add event listner to all button type element when clicked*/
 const buttons = document.querySelectorAll('button[type="button"]');
@@ -49,10 +50,6 @@ for(var b = 0;b<buttons.length; b++){
   buttons[b].addEventListener("click",buttonClicked,true);
 }
 
-// $('button[type="button"]').on('click', function() {
-//   const audio  = new Audio("./resource/sounds/click-button.mp3");
-//   audio.play();
-// }, {capture: true});
 
 popup.addEventListener("click",()=>{
   popup.classList.remove("active");
@@ -120,6 +117,7 @@ function getRandomNumber(min, max) {
 }
 
 function playText(_msg){
+  if(!soundEnable) { return;}
   if ('SpeechSynthesisUtterance' in window && 
       'speechSynthesis' in window ) {
       var speech = new SpeechSynthesisUtterance(_msg);
@@ -132,5 +130,7 @@ function playText(_msg){
       speech.onend = function(event) {
           console.log("speach completed");
       };
+  }else {
+    console.log("Browser dont support text to speech");
   }
-}
+} 

@@ -92,9 +92,7 @@ function playText(_msg){
         speech.volume = 1;
         speech.rate = 0.75;
         speech.pitch = 1;
-        console.log("Playing: "+_msg);
         window.speechSynthesis.speak(speech);
-
         speech.onend = function(event) {
             console.log("speach completed");
         };
