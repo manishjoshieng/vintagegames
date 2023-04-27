@@ -2,7 +2,6 @@ $(document).ready(function() {
     $('#navbar-placeholder').load('navbar.html');
     $('#footer-placeholder').load('footer.html');
     $('#setting-modal-placeholder').load('setting_modal.html', function() {
-        console.log("setting-modal loaded");
         // The setting modal content is fully loaded at this point
       
         // Bind the change event handlers inside the load callback function

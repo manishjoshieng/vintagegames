@@ -1,5 +1,22 @@
 $('#navbar-placeholder').load('navbar.html');
 $('#footer-placeholder').load('footer.html');
+$('#setting-modal-placeholder').load('setting_modal.html',function() {
+    // The setting modal content is fully loaded at this point
+    
+    // Bind the change event handlers inside the load callback function
+    var soundCheckBox = $('.soundSetting input[type="checkbox"]');
+    soundCheckBox.prop('checked', true);
+    soundCheckBox.change(function() {
+        if ($(this).is(":checked")) {
+        console.log("Sound enabled");
+        soundEnable = true;
+        } else {
+        console.log("Sound disabled");
+        soundEnable = false;
+        }
+    });
+    $('.secondDice').hide();
+});
 
 function Game() {
     this.gameStart                  = false;
